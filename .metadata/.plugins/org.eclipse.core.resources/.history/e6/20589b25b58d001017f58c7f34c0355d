@@ -92,21 +92,10 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  int state=0;
   while (1)
   {
-	  //HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
-	  //HAL_Delay(1000);
-	  if (state==0){
-		  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, 0);
-		  HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, 1);
-	  }else{
-		  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, 1);
-		  HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, 0);
-	  }
-
-	    state = !state;  // đảo trạng thái
-	    HAL_Delay(2000); // chỉ 1 delay
+	  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+	  HAL_Delay(1000);
 
     /* USER CODE END WHILE */
 
