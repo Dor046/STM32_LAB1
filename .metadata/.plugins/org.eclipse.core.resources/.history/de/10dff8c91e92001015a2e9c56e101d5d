@@ -95,10 +95,12 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  int counter = 0;
+  uint32_t previousMillis = 0;
   int state=0;
   while (1)
   {
+	  uint32_t currentMillis = HAL_GetTick();
+
 	  switch(state)
 	  {
 	  case 0: //RED ON; Gr ON
@@ -109,10 +111,10 @@ int main(void)
 		  HAL_GPIO_WritePin(Ye_GPIO_Port, Ye_Pin, 1);
 		  HAL_GPIO_WritePin(Gr_GPIO_Port, Gr_Pin, 0);
 
-		  if(counter >= 3) {
-			  counter = 0;
-		      state = 1;
-		         }
+		  if (currentMillis - previousMillis >= 3000) {
+		          previousMillis = currentMillis;
+		          state = 1;
+		        }
 		  break;
 
 	  case 1: //RED ON; Ye ON
@@ -123,10 +125,10 @@ int main(void)
 		  HAL_GPIO_WritePin(Ye_GPIO_Port, Ye_Pin, 0);
 		  HAL_GPIO_WritePin(Gr_GPIO_Port, Gr_Pin, 1);
 
-		  if(counter >= 2) {
-			  counter = 0;
-			  state = 2;
-		         }
+		  if (currentMillis - previousMillis >= 2000) {
+		         previousMillis = currentMillis;
+		         state = 2;
+		       }
 		       break;
 	  case 2: //GREEN ON; Re ON
 		  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, 1);
@@ -136,10 +138,10 @@ int main(void)
 		  HAL_GPIO_WritePin(Ye_GPIO_Port, Ye_Pin, 1);
 		  HAL_GPIO_WritePin(Gr_GPIO_Port, Gr_Pin, 1);
 
-		  if(counter >= 3) {
-			  counter = 0;
-			  state = 3;
-		          }
+		  if (currentMillis - previousMillis >= 3000) {
+		         previousMillis = currentMillis;
+		         state = 3;
+		       }
 		       break;
 	  case 3: //YELLOW ON; Re On
 	  		  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, 1);
@@ -149,14 +151,12 @@ int main(void)
 	  		  HAL_GPIO_WritePin(Ye_GPIO_Port, Ye_Pin, 1);
 	  		  HAL_GPIO_WritePin(Gr_GPIO_Port, Gr_Pin, 1);
 
-	  		if(counter >= 2) {
-	  			counter = 0;
-	  			state = 0;
-	  		        }
+	  		  if (currentMillis - previousMillis >= 2000) {
+	  		         previousMillis = currentMillis;
+	  		         state = 0;
+	  		       }
 	  		       break;
 	  }
-	  HAL_Delay(1000);
-	  counter++;
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
