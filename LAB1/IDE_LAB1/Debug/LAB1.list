@@ -116,7 +116,7 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  int state=0;
+  int state=0;//todo
  8000162:	2300      	movs	r3, #0
  8000164:	607b      	str	r3, [r7, #4]
   while (1)

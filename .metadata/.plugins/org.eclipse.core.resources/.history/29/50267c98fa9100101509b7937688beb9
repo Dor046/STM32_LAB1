@@ -95,7 +95,7 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  int state=0;//todo
+  int state=0;
   while (1)
   {
 
